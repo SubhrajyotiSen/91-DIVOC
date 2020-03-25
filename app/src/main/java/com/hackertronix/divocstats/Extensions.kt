@@ -2,6 +2,8 @@ package com.hackertronix.divocstats
 
 import org.joda.time.DateTime
 import org.joda.time.format.DateTimeFormat
+import java.text.SimpleDateFormat
+import java.util.*
 
 fun String.toFlagEmoji(): String {
     if (this.length != 2) {
@@ -30,6 +32,6 @@ fun String.parseDate(): String {
 }
 
 fun String.parseDateToLong(): Long {
-    val formatter = DateTimeFormat.forPattern("yyyy-MM-dd")
-    return formatter.parseMillis(this)
+    val format = SimpleDateFormat("yyyy-MM-dd", Locale.US)
+    return format.parse(this)?.time ?: throw Exception("Improperly formatted date")
 }
